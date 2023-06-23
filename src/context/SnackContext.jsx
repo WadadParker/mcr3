@@ -121,6 +121,40 @@ export const SnackProvider=({children})=>
         }
     }
 
+    const sortByIngredients=()=>
+    {
+        const {snackList,ascending}=state;
+        if(ascending===true)
+        {
+            const sortedSnacks = [...snackList].sort((a, b) => {
+                const ingredientsA = a.ingredients.join(", ").toLowerCase();
+                const ingredientsB = b.ingredients.join(", ").toLowerCase();
+                if (ingredientsA < ingredientsB) {
+                  return -1;
+                }
+                if (ingredientsA > ingredientsB) {
+                  return 1;
+                }
+                return 0;
+              });
+            
+            dispatch({type:"SORT_UPDATED",payload:sortedSnacks});
+        }
+        else {
+            const sortedSnacks = [...snackList].sort((a, b) => {
+                const ingredientsA = a.ingredients.join(", ").toLowerCase();
+                const ingredientsB = b.ingredients.join(", ").toLowerCase();
+                if (ingredientsA > ingredientsB) {
+                  return -1;
+                }
+                if (ingredientsA < ingredientsB) {
+                  return 1;
+                }
+                return 0;
+              });
+            dispatch({type:"SORT_UPDATED",payload:sortedSnacks});
+        }
+    }
 
     const filterBySearch=()=>
     {
@@ -131,7 +165,7 @@ export const SnackProvider=({children})=>
     }
 
     return (
-        <SnackContext.Provider value={{state,dispatch,sortById,sortByProductWeight,sortByProductPrice,sortByProductCalories,filterBySearch,sortByProductName}}>
+        <SnackContext.Provider value={{state,dispatch,sortById,sortByProductWeight,sortByProductPrice,sortByProductCalories,filterBySearch,sortByProductName,sortByIngredients}}>
             {children}
         </SnackContext.Provider>
     )

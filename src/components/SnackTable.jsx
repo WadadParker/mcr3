@@ -5,7 +5,7 @@ import { SnackContext } from "../context/SnackContext";
 
 export const SnackTable=()=>
 {
-    const {state,dispatch,sortById,sortByProductWeight,sortByProductPrice,sortByProductCalories,filterBySearch,sortByProductName}=useContext(SnackContext);
+    const {state,dispatch,sortById,sortByProductWeight,sortByProductPrice,sortByProductCalories,filterBySearch,sortByProductName,sortByIngredients}=useContext(SnackContext);
     const {search,snackList:snacks}=state;
     return (
         <div>
@@ -19,7 +19,7 @@ export const SnackTable=()=>
                     <th onClick={()=>sortByProductWeight()}>Product Weight</th>
                     <th onClick={()=>sortByProductPrice()}>Price</th>
                     <th onClick={()=>sortByProductCalories()}>Calories</th>
-                    <th>Ingredients</th>
+                    <th onClick={()=>sortByIngredients()}>Ingredients</th>
                     </tr>
                 </thead>
                 <tbody>
