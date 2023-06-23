@@ -1,0 +1,22 @@
+.table {
+    border-collapse: collapse;
+    margin: 1rem;
+    font-size: 1.5rem;
+}
+.table th, .table td {
+    border: 1px solid black;
+  padding: 1rem;
+}
+div {
+    text-align: left;
+}
+input {
+    padding: 1rem;
+    border-radius: 0.5rem;
+    margin: 1rem;
+    width: 18rem;
+
+}
+.table th {
+    cursor: pointer;
+}
