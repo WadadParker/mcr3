@@ -85,9 +85,53 @@ export const SnackProvider=({children})=>
         }
     }
 
+    const sortByProductName=()=>
+    {
+        const {snackList,ascending}=state;
+        if(ascending===true)
+        {
+            const sortedSnacks = [...snackList].sort((a, b) => {
+                const productA = a.product_name.toLowerCase();
+                const productB = b.product_name.toLowerCase();
+                if (productA < productB) {
+                  return -1;
+                }
+                if (productA > productB) {
+                  return 1;
+                }
+                return 0;
+              });
+
+            dispatch({type:"SORT_UPDATED",payload:sortedSnacks});
+        }
+        else {
+            
+            const sortedSnacks = [...snackList].sort((a, b) => {
+                const productA = a.product_name.toLowerCase();
+                const productB = b.product_name.toLowerCase();
+                if (productA > productB) {
+                  return -1;
+                }
+                if (productA < productB) {
+                  return 1;
+                }
+                return 0;
+              });
+            dispatch({type:"SORT_UPDATED",payload:sortedSnacks});
+        }
+    }
+
+
+    const filterBySearch=()=>
+    {
+        const {snackList,search}=state;
+
+        const searchedSnacks=[...snackList].filter(({product_name})=>(product_name.toLowerCase()).includes(search.toLowerCase()));
+        return searchedSnacks;
+    }
 
     return (
-        <SnackContext.Provider value={{state,dispatch,sortById,sortByProductWeight,sortByProductPrice,sortByProductCalories}}>
+        <SnackContext.Provider value={{state,dispatch,sortById,sortByProductWeight,sortByProductPrice,sortByProductCalories,filterBySearch,sortByProductName}}>
             {children}
         </SnackContext.Provider>
     )

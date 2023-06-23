@@ -5,7 +5,7 @@ import { SnackContext } from "../context/SnackContext";
 
 export const SnackTable=()=>
 {
-    const {state,dispatch,sortById,sortByProductWeight,sortByProductPrice,sortByProductCalories}=useContext(SnackContext);
+    const {state,dispatch,sortById,sortByProductWeight,sortByProductPrice,sortByProductCalories,filterBySearch,sortByProductName}=useContext(SnackContext);
     const {search,snackList:snacks}=state;
     return (
         <div>
@@ -15,7 +15,7 @@ export const SnackTable=()=>
                 <thead>
                     <tr>
                     <th onClick={()=>sortById()}>ID</th>
-                    <th >Product Name</th>
+                    <th onClick={()=>sortByProductName()}>Product Name</th>
                     <th onClick={()=>sortByProductWeight()}>Product Weight</th>
                     <th onClick={()=>sortByProductPrice()}>Price</th>
                     <th onClick={()=>sortByProductCalories()}>Calories</th>
@@ -23,7 +23,7 @@ export const SnackTable=()=>
                     </tr>
                 </thead>
                 <tbody>
-                    {snacks.map((snack) => (
+                    {filterBySearch().map((snack) => (
                     <tr key={snack.id}>
                         <td>{snack.id}</td>
                         <td>{snack.product_name}</td>
